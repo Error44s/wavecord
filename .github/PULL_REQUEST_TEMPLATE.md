@@ -1,32 +1,37 @@
-### 🚀 Pull Request
+### Summary
 
-Thank you for contributing to **wavecord**!  
-Please review the checklist below before submitting.
-
----
-
-### 📋 Summary
-
-<!-- Briefly explain what this PR does -->
+<!-- Briefly describe what this pull request does and why it is needed -->
 
 ---
 
-### ✅ Pull Request Checklist
+### Checklist
 
-- [ ] My code runs without errors
-- [ ] I’ve run `ruff`, `black`, and `pyright`
-- [ ] My PR targets `main` or `dev`
-- [ ] I’ve tested my feature/fix locally
-- [ ] I’ve added docs/comments if needed
-
----
-
-### 🧪 Related Issues
-
-Closes #[issue_number] (if applicable)
+- [ ] Code runs without errors
+- [ ] Passed `ruff`, `black`, and `pyright`
+- [ ] PR targets `main` or `dev`
+- [ ] Feature or fix has been tested locally
+- [ ] Comments or documentation were updated if behavior changed
 
 ---
 
-### 💬 Additional Notes
+### Code Changes
 
-<!-- Got any edge cases, notes for reviewers, or fun surprises? Drop them here! -->
+Select all that apply
+
+- [ ] Bug fix
+- [ ] New feature (e.g. new player method or API)
+- [ ] Breaking change (e.g. changed method signature or behavior)
+- [ ] Non-code update (e.g. docs, typing, cleanup)
+
+---
+
+### Related Issues
+
+<!-- Optional -->
+Closes #
+
+---
+
+### Notes for Reviewers
+
+<!-- Optional: edge cases, known limitations, or things to keep in mind -->

@@ -2,46 +2,40 @@
    :alt: wavecord
    :align: center
 
+A modern, typed Lavalink wrapper for Pycord bots.
+
 ================================================================================
 .
 ================================================================================
 
-.. image:: https://img.shields.io/pypi/v/wavecord.svg?style=for-the-badge&color=blueviolet
-   :target: https://pypi.org/project/wavecord/
-   :alt: PyPI version
+.. raw:: html
 
-.. image:: https://img.shields.io/pypi/pyversions/wavecord.svg?style=for-the-badge
-   :target: https://pypi.org/project/wavecord/
-   :alt: Supported Python versions
+   <p align="center">
+     <img src="https://img.shields.io/pypi/v/wavecord?style=for-the-badge&color=blueviolet&logo=pypi&logoColor=white" />
+     <img src="https://img.shields.io/pypi/pyversions/wavecord?style=for-the-badge&logo=python&logoColor=white" />
+     <img src="https://img.shields.io/github/actions/workflow/status/error44s/wavecord/ci.yml?label=build&style=for-the-badge&logo=github" />
+     <img src="https://img.shields.io/github/license/error44s/wavecord?style=for-the-badge" />
+     <img src="https://img.shields.io/badge/typing-checked-blue?style=for-the-badge" />
+   </p>
 
-.. image:: https://img.shields.io/github/actions/workflow/status/error44s/wavecord/ci.yml?label=build&style=for-the-badge
-   :target: https://github.com/error44s/wavecord/actions
-   :alt: Build Status
+================================================================================
+.
+================================================================================
 
-.. image:: https://img.shields.io/github/license/error44s/wavecord?style=for-the-badge
-   :target: https://github.com/error44s/wavecord/blob/main/LICENSE
-   :alt: License
+.. raw:: html
 
-.. image:: https://img.shields.io/badge/typing-checked-blue?style=for-the-badge
-   :alt: Typing Checked
+   <h3>Features</h3>
 
-wavecord is a **2025-ready**, fully typed, async Lavalink wrapper built for **Pycord bots**.  
-Fast, clean, feature-rich — and made for serious music bots.
+- **Full Music Support** – play, pause, resume, stop, skip, volume, shuffle  
+- **Reconnect & Session Restore** – handles node disconnects gracefully  
+- **Track Metadata** – title, author, duration, description  
+- **Plugin Support** – Spotify, Deezer, Apple Music (via Lavalink plugins)  
+- **Modern Python** – fully typed, Black + Ruff + Pyright ready  
+- **Performance-focused** – scalable across large bots
 
--------------------------------------------------------------------------------
-✨ Features
--------------------------------------------------------------------------------
+.. raw:: html
 
-- 🎵 **Full Music Support** – play, pause, resume, stop, skip, volume, shuffle
-- 🔄 **Reconnect & Session Restore** – handles node disconnects gracefully
-- 🎶 **Track Metadata** – title, author, duration, description
-- 📦 **Plugin Support** – Spotify, Deezer, Apple Music (via Lavalink plugins)
-- 💡 **Modern Python** – fully typed, Black + Ruff + Pyright ready
-- 🚀 **Performance-focused** – scalable across large bots
-
--------------------------------------------------------------------------------
-📦 Installation
--------------------------------------------------------------------------------
+   <h3>Installation</h3>
 
 Install from ``PyPI``
 
@@ -49,19 +43,19 @@ Install from ``PyPI``
 
    pip install wavecord
 
-Install from source ``(latest dev version)``
+Install from source (``latest dev version``)
 
 .. code-block:: bash
 
-   git clone https://github.com/error44s/wavecord
-   cd wavecord
-   pip install -e .
+   $ git clone https://github.com/error44s/wavecord
+   $ cd wavecord
+   $ pip install -e .
 
 Requires Python ``3.13``
 
--------------------------------------------------------------------------------
-🚀 Quick Example
--------------------------------------------------------------------------------
+.. raw:: html
+
+   <h3>Quick Example</h3>
 
 .. code-block:: python
 
@@ -84,41 +78,41 @@ Requires Python ``3.13``
        await player.play(tracks[0])
        await ctx.send(f"🎶 Now playing: {tracks[0].title}")
 
--------------------------------------------------------------------------------
-📘 Documentation
--------------------------------------------------------------------------------
+.. raw:: html
+
+   <h3>Documentation</h3>
 
 Full documentation will be available soon on: https://wavecord.dev
 
 In the meantime, see the `examples/` folder.
 
--------------------------------------------------------------------------------
-🤝 Contributing
--------------------------------------------------------------------------------
+.. raw:: html
+
+   <h3>Contributing</h3>
 
 Contributions are welcome!
 
-- Fork the project
-- Use a branch format like: ``feature/your-feature``
+- Fork the project  
+- Use a branch format like: ``feature/your-feature``  
 - Ensure your code passes:
   - **Black** for formatting
   - **Ruff** for linting
-  - **Pyright** for type-checking
+  - **Pyright** for type-checking  
 - All PRs require review by a maintainer
 
 Read the full guidelines in ``CONTRIBUTING.md``.
 
--------------------------------------------------------------------------------
-🛡 License – MIT
--------------------------------------------------------------------------------
+.. raw:: html
+
+   <h3>License – MIT</h3>
 
 This project is licensed under the MIT License.
 
 You are **free to use, modify, and distribute** this software —  
 but **without any warranty**. See the LICENSE file for full terms.
 
--------------------------------------------------------------------------------
-💖 Made with passion for the Discord & Python community
--------------------------------------------------------------------------------
+.. raw:: html
+
+   <h3>Made with passion for the Discord & Python community</h3>
 
 Maintained by the **wavecord** team and contributors.
