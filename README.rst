@@ -57,7 +57,7 @@ Install from source ``(latest dev version)``
    cd wavecord
    pip install -e .
 
-Requires Python ``3.9+``
+Requires Python ``3.13``
 
 -------------------------------------------------------------------------------
 🚀 Quick Example
