@@ -1,0 +1,9 @@
+# Set the default maintainer for the whole project
+*       @error44s
+
+# Optional: Assign specific maintainers to key directories
+/docs/  @error44s @another-maintainer
+/src/   @error44s
+
+# You can add team-based ownership if using GitHub Teams:
+# /src/   @error44s/wavecord-maintainers
