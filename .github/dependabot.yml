@@ -3,7 +3,7 @@ updates:
   - package-ecosystem: "pip"
     directory: "/"                 
     schedule:
-      interval: "daily"
+      interval: "weekly"
     allow:
       - dependency-type: "direct"
     commit-message:
@@ -15,11 +15,17 @@ updates:
         versions: ["<26.1.0"]
     labels:
       - "dependencies"
-      - "security"
     groups:
       python-deps:
         patterns:
           - "*"
+
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    labels:
+      - "security"
     security-updates: true
 
   - package-ecosystem: "github-actions"
