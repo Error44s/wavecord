@@ -1,4 +1,4 @@
-name: CI
+name: ✅ CI
 
 on:
   push:
@@ -6,13 +6,16 @@ on:
   pull_request:
     branches: [main, dev]
 
+permissions:
+  contents: read
+
 jobs:
-  lint-type-check:
-    name: Code Quality (Ruff, Black, Pyright)
+  lint-test:
+    name: 🧪 Lint & Type Check
     runs-on: ubuntu-latest
 
     steps:
-      - name: 📥 Checkout repository
+      - name: ⬇️ Checkout code
         uses: actions/checkout@v4
 
       - name: 🐍 Set up Python
@@ -23,13 +26,14 @@ jobs:
       - name: 📦 Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install .[dev]
+          pip install -r requirements.txt
+          pip install ruff black pyright
 
-      - name: 🧹 Run Ruff (Linting)
-        run: ruff .
-
-      - name: 🎨 Run Black (Formatting Check)
+      - name: 🧼 Run Black
         run: black . --check
 
-      - name: 🧠 Run Pyright (Static Typing)
-        uses: jakebailey/pyright-action@v1
+      - name: 🐶 Run Ruff
+        run: ruff check .
+
+      - name: 🧠 Run Pyright
+        run: pyright
