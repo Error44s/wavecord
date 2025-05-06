@@ -3,7 +3,7 @@ updates:
   - package-ecosystem: "pip"
     directory: "/"                 
     schedule:
-      interval: "weekly"
+      interval: "daily"
     allow:
       - dependency-type: "direct"
     commit-message:
@@ -19,7 +19,6 @@ updates:
       python-deps:
         patterns:
           - "*"
-    security-updates: true
 
   - package-ecosystem: "github-actions"
     directory: "/"
