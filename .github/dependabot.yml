@@ -19,13 +19,6 @@ updates:
       python-deps:
         patterns:
           - "*"
-
-  - package-ecosystem: "pip"
-    directory: "/"
-    schedule:
-      interval: "daily"
-    labels:
-      - "security"
     security-updates: true
 
   - package-ecosystem: "github-actions"
