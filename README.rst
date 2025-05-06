@@ -2,9 +2,9 @@
    :alt: wavecord
    :align: center
 
-A modern, full-featured Lavalink wrapper for serious music bots. Built for **Pycord**, redesigned for 2025.
-
-======
+================================================================================
+.
+================================================================================
 
 .. image:: https://img.shields.io/pypi/v/wavecord.svg?style=for-the-badge&color=blueviolet
    :target: https://pypi.org/project/wavecord/
@@ -25,30 +25,31 @@ A modern, full-featured Lavalink wrapper for serious music bots. Built for **Pyc
 .. image:: https://img.shields.io/badge/typing-checked-blue?style=for-the-badge
    :alt: Typing Checked
 
-======
+wavecord is a **2025-ready**, fully typed, async Lavalink wrapper built for **Pycord bots**.  
+Fast, clean, feature-rich — and made for serious music bots.
+
+================================================================================
+✨ Features
+================================================================================
+
+- 🎵 **Full Music Support** – play, pause, resume, stop, skip, volume, shuffle
+- 🔄 **Reconnect & Session Restore** – handles node disconnects gracefully
+- 🎶 **Track Metadata** – title, author, duration, description
+- 📦 **Plugin Support** – Spotify, Deezer, Apple Music (via Lavalink plugins)
+- 💡 **Modern Python** – fully typed, Black + Ruff + Pyright ready
+- 🚀 **Performance-focused** – scalable across large bots
 
 -------------------------------------------------------------------------------
-Features
+📦 Installation
 -------------------------------------------------------------------------------
 
-- **Full Music Support** – play, pause, resume, stop, skip, volume, shuffle
-- **Reconnect & Session Restore** – handles node disconnects gracefully
-- **Track Metadata** – title, author, duration, description
-- **Plugin Support** – Spotify, Deezer, Apple Music (via Lavalink plugins)
-- **Modern Python** – fully typed, Black + Ruff + Pyright ready
-- **Performance-focused** – scalable across large bots
-
--------------------------------------------------------------------------------
-Installation
--------------------------------------------------------------------------------
-
-**Install from PyPI:**
+Install from ``PyPI``
 
 .. code-block:: bash
 
    pip install wavecord
 
-**Install from source (latest dev version):**
+Install from source ``(latest dev version)``
 
 .. code-block:: bash
 
@@ -56,10 +57,10 @@ Installation
    cd wavecord
    pip install -e .
 
-**Requires Python 3.9+**
+Requires Python ``3.9+``
 
 -------------------------------------------------------------------------------
-Quick Example
+🚀 Quick Example
 -------------------------------------------------------------------------------
 
 .. code-block:: python
@@ -84,7 +85,7 @@ Quick Example
        await ctx.send(f"🎶 Now playing: {tracks[0].title}")
 
 -------------------------------------------------------------------------------
-Documentation
+📘 Documentation
 -------------------------------------------------------------------------------
 
 Full documentation will be available soon on: https://wavecord.dev
@@ -92,7 +93,7 @@ Full documentation will be available soon on: https://wavecord.dev
 In the meantime, see the `examples/` folder.
 
 -------------------------------------------------------------------------------
-Contributing
+🤝 Contributing
 -------------------------------------------------------------------------------
 
 Contributions are welcome!
@@ -108,7 +109,7 @@ Contributions are welcome!
 Read the full guidelines in ``CONTRIBUTING.md``.
 
 -------------------------------------------------------------------------------
-License – MIT
+🛡 License – MIT
 -------------------------------------------------------------------------------
 
 This project is licensed under the MIT License.
@@ -117,7 +118,7 @@ You are **free to use, modify, and distribute** this software —
 but **without any warranty**. See the LICENSE file for full terms.
 
 -------------------------------------------------------------------------------
-Made with passion for the Discord & Python community
+💖 Made with passion for the Discord & Python community
 -------------------------------------------------------------------------------
 
 Maintained by the **wavecord** team and contributors.
