@@ -1,0 +1,13 @@
+name: "❓ Question"
+description: Ask a question or request guidance.
+title: "[Question] "
+labels: ["question"]
+assignees: []
+
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: Your Question
+      placeholder: Ask anything related to Wavecord.
+      required: true
