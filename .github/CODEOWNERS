@@ -2,7 +2,7 @@
 *       @error44s
 
 # Optional: Assign specific maintainers to key directories
-/docs/  @error44s @another-maintainer
+/docs/  @error44s
 /src/   @error44s
 
 # You can add team-based ownership if using GitHub Teams:
