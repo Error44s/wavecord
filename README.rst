@@ -28,9 +28,9 @@
 wavecord is a **2025-ready**, fully typed, async Lavalink wrapper built for **Pycord bots**.  
 Fast, clean, feature-rich — and made for serious music bots.
 
-================================================================================
+-------------------------------------------------------------------------------
 ✨ Features
-================================================================================
+-------------------------------------------------------------------------------
 
 - 🎵 **Full Music Support** – play, pause, resume, stop, skip, volume, shuffle
 - 🔄 **Reconnect & Session Restore** – handles node disconnects gracefully
