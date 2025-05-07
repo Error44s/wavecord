@@ -1,40 +1,36 @@
 from typing import TYPE_CHECKING
-from discord.ext.commands import Bot, AutoShardedBot
+
+from discord.ext.commands import AutoShardedBot, Bot
+
+from .exceptions import WavecordException
 from .node import Node
 from .player import WavePlayer
-from .exceptions import WavecordException
 
 if TYPE_CHECKING:
-    pass
+    from discord import VoiceChannel
 
 
 class WaveClient:
-    """Main controller for all Lavalink-related logic."""
-
     _bot: Bot | AutoShardedBot
     _node: Node
     _players: dict[int, WavePlayer] = {}
 
     @classmethod
-    async def initialize(cls, bot: Bot | AutoShardedBot, node: Node):
-        """Initialize Wavecord and connect the node."""
+    async def initialize(cls, bot: Bot | AutoShardedBot, node: Node) -> None:
         cls._bot = bot
         cls._node = node
         await node.connect()
 
-        # Attach WebSocket hook
         bot._connection.dispatch_lavalink_event = cls._dispatch
 
     @classmethod
     def get_player(cls, guild_id: int) -> WavePlayer:
-        """Return an existing or new player for a guild."""
         if guild_id not in cls._players:
             cls._players[guild_id] = WavePlayer(guild_id=guild_id, node=cls._node)
         return cls._players[guild_id]
 
     @classmethod
-    async def _dispatch(cls, guild_id: int, payload: dict):
-        """Handle raw WebSocket events (voice state/server updates)."""
+    async def _dispatch(cls, guild_id: int, payload: dict[str, object]) -> None:
         player = cls._players.get(guild_id)
         if player:
             await player._voice_event(payload)
