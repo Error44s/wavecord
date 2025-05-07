@@ -93,7 +93,6 @@ class Node:
         await self.ws.send_json(data)
 
     async def load_tracks(self, identifier: str) -> list[Track]:
-        """Lädt Tracks oder Playlists von Lavalink mit dem gegebenen Identifier (Suchbegriff oder URL)."""
         async with self.session.get(
             f"{self.base_url}/v4/loadtracks",
             params={"identifier": identifier},
@@ -103,8 +102,8 @@ class Node:
                 raise TrackLoadError(f"Failed to load tracks for: {identifier}")
 
             data = await resp.json()
-            tracks = data.get("data")
-            if not tracks:
+            track_data = data.get("data") or data.get("tracks", [])
+            if not track_data:
                 return []
 
-            return [Track.build(track) for track in tracks]
+            return [Track.build(track) for track in track_data]
