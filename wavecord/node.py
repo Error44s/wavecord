@@ -6,8 +6,8 @@ from typing import TYPE_CHECKING, Optional
 
 import aiohttp
 
-from .exceptions import NodeConnectionError
 from .events import emitter
+from .exceptions import NodeConnectionError
 
 if TYPE_CHECKING:
     from .player import WavePlayer
@@ -29,7 +29,6 @@ class Node:
         self.password = password
         self.secure = secure
         self.session = session or aiohttp.ClientSession()
-
         self.players: dict[int, WavePlayer] = {}
         self.ws: Optional[aiohttp.ClientWebSocketResponse] = None
         self.connected = False
@@ -42,7 +41,7 @@ class Node:
     async def connect(self) -> None:
         headers = {
             "Authorization": self.password,
-            "User-Agent": "Wavecord/1.0"
+            "User-Agent": "Wavecord/1.0",
         }
         ws_url = self.base_url.replace("http", "ws") + "/v4/websocket"
 
@@ -53,7 +52,7 @@ class Node:
             asyncio.create_task(self.listen())
         except Exception as e:
             log.error("❌ Failed to connect to Lavalink node: %s", e)
-            raise NodeConnectionError(f"Could not connect to Lavalink node at {ws_url}") from e
+            raise NodeConnectionError from e
 
     async def disconnect(self) -> None:
         if self.ws and not self.ws.closed:
@@ -68,17 +67,12 @@ class Node:
         async for msg in self.ws:
             if msg.type == aiohttp.WSMsgType.TEXT:
                 await emitter.emit("raw_event", msg.json(loads=None))
-            elif msg.type == aiohttp.WSMsgType.CLOSED:
-                log.warning("⚠️ WebSocket connection closed")
-                self.connected = False
-                break
-            elif msg.type == aiohttp.WSMsgType.ERROR:
-                log.error("💥 WebSocket error occurred: %s", msg)
+            elif msg.type in (aiohttp.WSMsgType.CLOSED, aiohttp.WSMsgType.ERROR):
+                log.warning("⚠️ WebSocket connection closed or error")
                 self.connected = False
                 break
 
-    async def send(self, data: dict) -> None:
+    async def send(self, data: dict[str, object]) -> None:
         if not self.ws or self.ws.closed:
             raise NodeConnectionError("WebSocket is not connected")
-
         await self.ws.send_json(data)
