@@ -13,12 +13,12 @@ if TYPE_CHECKING:
 
 class WavePlayer:
     def __init__(self, guild_id: int, node: Node) -> None:
-        self.guild_id = guild_id
-        self.node = node
+        self.guild_id: int = guild_id
+        self.node: Node = node
         self.channel_id: Optional[int] = None
         self.queue: TrackQueue = TrackQueue()
-        self.volume = 100
-        self.paused = False
+        self.volume: int = 100
+        self.paused: bool = False
         self.current: Optional[Track] = None
 
     async def connect(self, channel: VoiceChannel) -> None:
@@ -46,26 +46,39 @@ class WavePlayer:
 
     async def stop(self) -> None:
         self.current = None
-        await self.node.send({"op": "stop", "guildId": self.guild_id})
+        await self.node.send(
+            {
+                "op": "stop",
+                "guildId": self.guild_id,
+            }
+        )
 
     async def pause(self, pause: bool = True) -> None:
         self.paused = pause
         await self.node.send(
-            {"op": "pause", "guildId": self.guild_id, "pause": pause}
+            {
+                "op": "pause",
+                "guildId": self.guild_id,
+                "pause": pause,
+            }
         )
 
     async def set_volume(self, volume: int) -> None:
         self.volume = max(0, min(1000, volume))
         await self.node.send(
-            {"op": "volume", "guildId": self.guild_id, "volume": self.volume}
+            {
+                "op": "volume",
+                "guildId": self.guild_id,
+                "volume": self.volume,
+            }
         )
 
     async def skip(self) -> None:
-        if self.queue.is_empty():
+        next_track = self.queue.pop()
+        if next_track is None:
             await self.stop()
             return
 
-        next_track = self.queue.pop()
         await self.play(next_track)
 
     async def shuffle(self) -> None:
