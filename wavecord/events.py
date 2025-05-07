@@ -19,7 +19,7 @@ class EventEmitter:
         if callback in self._listeners[event]:
             self._listeners[event].remove(callback)
 
-    async def emit(self, event: str, *args, **kwargs) -> None:
+    async def emit(self, event: str, *args: Any, **kwargs: Any) -> None:
         """Emits an event to all registered listeners."""
         for callback in self._listeners.get(event, []):
             if inspect.iscoroutinefunction(callback):
