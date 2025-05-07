@@ -1,5 +1,5 @@
 from __future__ import annotations
-from typing import Callable, DefaultDict, List, Any, Coroutine
+from typing import Callable, DefaultDict, List, Any
 from collections import defaultdict
 import inspect
 
