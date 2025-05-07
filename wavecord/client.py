@@ -1,11 +1,11 @@
-from typing import Optional, TYPE_CHECKING
+from typing import TYPE_CHECKING
 from discord.ext.commands import Bot, AutoShardedBot
 from .node import Node
 from .player import WavePlayer
 from .exceptions import WavecordException
 
 if TYPE_CHECKING:
-    from discord import VoiceChannel, Guild
+    pass
 
 
 class WaveClient:
