@@ -1,5 +1,6 @@
 from typing import ClassVar
 
+# pyright: reportMissingTypeStubs=false
 from discord.ext.commands import AutoShardedBot, Bot
 
 from .exceptions import WavecordException
