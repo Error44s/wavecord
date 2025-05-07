@@ -10,10 +10,9 @@ from .events import emitter
 from .exceptions import NodeConnectionError, TrackLoadError
 from .track import Track
 
-# ruff: noqa: F401
 if TYPE_CHECKING:
-    from discord.ext.commands import Bot, AutoShardedBot
     from .player import WavePlayer
+    from discord.ext.commands import Bot, AutoShardedBot
 
 log = logging.getLogger("wavecord.node")
 
@@ -46,14 +45,13 @@ class Node:
 
     async def connect(self) -> None:
         if self.user_id is None:
-            raise NodeConnectionError("User ID must be set for Lavalink connection")
+            raise NodeConnectionError("User ID is required for Lavalink v4")
 
         headers = {
             "Authorization": self.password,
             "User-Id": str(self.user_id),
             "User-Agent": "Wavecord/1.0",
         }
-
         ws_url = self.base_url.replace("http", "ws") + "/v4/websocket"
 
         try:
@@ -63,7 +61,9 @@ class Node:
             asyncio.create_task(self.listen())
         except Exception as e:
             log.error("❌ Failed to connect to Lavalink node: %s", e)
-            raise NodeConnectionError(f"Could not connect to Lavalink node at {ws_url}") from e
+            raise NodeConnectionError(
+                f"Could not connect to Lavalink node at {ws_url}"
+            ) from e
 
     async def disconnect(self) -> None:
         if self.ws and not self.ws.closed:
@@ -94,14 +94,18 @@ class Node:
         await self.ws.send_json(data)
 
     async def load_tracks(self, identifier: str) -> list[Track]:
+        """Lädt Tracks oder Playlists von Lavalink mit dem gegebenen Identifier (Suchbegriff oder URL)."""
         async with self.session.get(
             f"{self.base_url}/v4/loadtracks",
             params={"identifier": identifier},
-            headers={"Authorization": self.password, "User-Id": str(self.user_id)},
+            headers={"Authorization": self.password},
         ) as resp:
             if resp.status != 200:
                 raise TrackLoadError(f"Failed to load tracks for: {identifier}")
 
             data = await resp.json()
-            tracks = data.get("data") or data.get("tracks") or []
+            tracks = data.get("data")
+            if not tracks:
+                return []
+
             return [Track.build(track) for track in tracks]
