@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING, Optional
 
 from .track import Track
 from .queue import Queue
-from .exceptions import PlayerNotConnected, WavecordException
+from .exceptions import PlayerNotConnected
 
 if TYPE_CHECKING:
     from .node import Node
