@@ -8,6 +8,8 @@ from .track import Track
 
 
 class TrackQueue:
+    """A simple FIFO queue that manages upcoming tracks."""
+
     def __init__(self) -> None:
         self._queue: Deque[Track] = deque()
 
