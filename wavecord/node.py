@@ -29,6 +29,7 @@ class Node:
         self.password = password
         self.secure = secure
         self.session = session or aiohttp.ClientSession()
+
         self.players: dict[int, WavePlayer] = {}
         self.ws: Optional[aiohttp.ClientWebSocketResponse] = None
         self.connected = False
@@ -52,7 +53,9 @@ class Node:
             asyncio.create_task(self.listen())
         except Exception as e:
             log.error("❌ Failed to connect to Lavalink node: %s", e)
-            raise NodeConnectionError from e
+            raise NodeConnectionError(
+                f"Could not connect to Lavalink node at {ws_url}"
+            ) from e
 
     async def disconnect(self) -> None:
         if self.ws and not self.ws.closed:
@@ -66,13 +69,18 @@ class Node:
 
         async for msg in self.ws:
             if msg.type == aiohttp.WSMsgType.TEXT:
-                await emitter.emit("raw_event", msg.json(loads=None))
-            elif msg.type in (aiohttp.WSMsgType.CLOSED, aiohttp.WSMsgType.ERROR):
-                log.warning("⚠️ WebSocket connection closed or error")
+                await emitter.emit("raw_event", msg.json())
+            elif msg.type == aiohttp.WSMsgType.CLOSED:
+                log.warning("⚠️ WebSocket connection closed")
+                self.connected = False
+                break
+            elif msg.type == aiohttp.WSMsgType.ERROR:
+                log.error("💥 WebSocket error occurred: %s", msg)
                 self.connected = False
                 break
 
     async def send(self, data: dict[str, object]) -> None:
         if not self.ws or self.ws.closed:
             raise NodeConnectionError("WebSocket is not connected")
+
         await self.ws.send_json(data)
