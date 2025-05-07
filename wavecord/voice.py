@@ -8,7 +8,7 @@ if TYPE_CHECKING:
 
 class VoiceManager:
     def __init__(self, node: Node) -> None:
-        self.node = node
+        self.node: Node = node
         self._states: dict[int, dict[str, object]] = {}
 
     async def update_state(self, guild_id: int, session_id: str) -> None:
