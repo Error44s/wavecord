@@ -5,17 +5,17 @@ from typing import Any, Dict, Optional
 
 class Track:
     def __init__(self, encoded: str, info: Dict[str, Any]) -> None:
-        self.encoded = encoded
-        self.info = info
+        self.encoded: str = encoded
+        self.info: Dict[str, Any] = info
 
-        self.title = info.get("title", "Unknown Title")
-        self.author = info.get("author", "Unknown Author")
-        self.duration = info.get("length", 0)
-        self.stream = info.get("isStream", False)
-        self.uri = info.get("uri")
-        self.source = info.get("sourceName", "Unknown")
-        self.thumbnail = info.get("artworkUrl") or self._guess_thumbnail()
-        self.description = info.get("description")
+        self.title: str = info.get("title", "Unknown Title")
+        self.author: str = info.get("author", "Unknown Author")
+        self.duration: int = info.get("length", 0)
+        self.stream: bool = info.get("isStream", False)
+        self.uri: Optional[str] = info.get("uri")
+        self.source: str = info.get("sourceName", "Unknown")
+        self.thumbnail: Optional[str] = info.get("artworkUrl") or self._guess_thumbnail()
+        self.description: Optional[str] = info.get("description")
 
     def __str__(self) -> str:
         return f"{self.title} by {self.author}"
