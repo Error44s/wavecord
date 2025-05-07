@@ -12,7 +12,6 @@ from .track import Track
 
 if TYPE_CHECKING:
     from .player import WavePlayer
-    from discord.ext.commands import Bot, AutoShardedBot
 
 log = logging.getLogger("wavecord.node")
 
