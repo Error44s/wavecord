@@ -6,9 +6,6 @@ from .exceptions import WavecordException
 from .node import Node
 from .player import WavePlayer
 
-if TYPE_CHECKING:
-    from discord import VoiceChannel
-
 
 class WaveClient:
     _bot: Bot | AutoShardedBot
