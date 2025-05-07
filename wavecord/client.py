@@ -1,5 +1,3 @@
-from typing import TYPE_CHECKING
-
 from discord.ext.commands import AutoShardedBot, Bot
 
 from .exceptions import WavecordException
