@@ -1,0 +1,30 @@
+from __future__ import annotations
+from typing import Callable, Dict, List, Any, DefaultDict
+from collections import defaultdict
+
+
+class EventEmitter:
+    """A minimal async event emitter system for internal hooks."""
+
+    def __init__(self):
+        self._listeners: DefaultDict[str, List[Callable[..., Any]]] = defaultdict(list)
+
+    def on(self, event: str, callback: Callable[..., Any]) -> None:
+        """Registers a new listener for an event."""
+        self._listeners[event].append(callback)
+
+    def off(self, event: str, callback: Callable[..., Any]) -> None:
+        """Removes a listener from an event."""
+        if callback in self._listeners[event]:
+            self._listeners[event].remove(callback)
+
+    async def emit(self, event: str, *args, **kwargs) -> None:
+        """Emits an event to all registered listeners."""
+        for callback in self._listeners.get(event, []):
+            result = callback(*args, **kwargs)
+            if callable(result):
+                await result
+
+
+# Global emitter instance
+emitter = EventEmitter()
