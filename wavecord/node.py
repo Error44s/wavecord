@@ -23,12 +23,14 @@ class Node:
         port: int = 2333,
         password: str = "youshallnotpass",
         secure: bool = False,
+        user_id: Optional[int] = None,
         session: Optional[aiohttp.ClientSession] = None,
     ) -> None:
         self.host = host
         self.port = port
         self.password = password
         self.secure = secure
+        self.user_id = user_id
         self.session = session or aiohttp.ClientSession()
 
         self.players: dict[int, WavePlayer] = {}
@@ -41,8 +43,12 @@ class Node:
         return f"{scheme}://{self.host}:{self.port}"
 
     async def connect(self) -> None:
+        if self.user_id is None:
+            raise NodeConnectionError("User ID is required for Lavalink v4")
+
         headers = {
             "Authorization": self.password,
+            "User-Id": str(self.user_id),
             "User-Agent": "Wavecord/1.0",
         }
         ws_url = self.base_url.replace("http", "ws") + "/v4/websocket"
