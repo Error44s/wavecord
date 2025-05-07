@@ -25,7 +25,7 @@ This library is written in **modern Python 3.13** using
 
 ### 🔧 Setup for Local Development
 
-> ✅ Requires Python 3.10+
+> ✅ Requires Python 3.13
 
 Clone the repo and install dev dependencies
 ```bash
