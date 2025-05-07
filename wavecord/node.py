@@ -10,6 +10,7 @@ from .events import emitter
 from .exceptions import NodeConnectionError, TrackLoadError
 from .track import Track
 
+# ruff: noqa: F401
 if TYPE_CHECKING:
     from discord.ext.commands import Bot, AutoShardedBot
     from .player import WavePlayer
