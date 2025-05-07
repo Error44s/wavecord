@@ -84,3 +84,12 @@ class Node:
             raise NodeConnectionError("WebSocket is not connected")
 
         await self.ws.send_json(data)
+
+    async def load_tracks(self, identifier: str) -> dict[str, object]:
+        """Lädt Tracks oder Playlists von Lavalink mit dem gegebenen Identifier (Suchbegriff oder URL)."""
+        async with self.session.get(
+            f"{self.base_url}/v4/loadtracks",
+            params={"identifier": identifier},
+            headers={"Authorization": self.password},
+        ) as resp:
+            return await resp.json()
