@@ -1,7 +1,0 @@
-{
-  "typeCheckingMode": "strict",
-  "reportMissingTypeStubs": false,
-  "useLibraryCodeForTypes": true,
-  "extraPaths": ["./.venv/lib/python3.13/site-packages", "./.venv/Lib/site-packages"],
-  "ignore": ["**/discord/ext/commands"]
-}
