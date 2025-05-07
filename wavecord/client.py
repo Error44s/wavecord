@@ -1,3 +1,5 @@
+from typing import ClassVar
+
 from discord.ext.commands import AutoShardedBot, Bot
 
 from .exceptions import WavecordException
@@ -6,9 +8,9 @@ from .player import WavePlayer
 
 
 class WaveClient:
-    _bot: Bot | AutoShardedBot
-    _node: Node
-    _players: dict[int, WavePlayer] = {}
+    _bot: ClassVar[Bot | AutoShardedBot]
+    _node: ClassVar[Node]
+    _players: ClassVar[dict[int, WavePlayer]] = {}
 
     @classmethod
     async def initialize(cls, bot: Bot | AutoShardedBot, node: Node) -> None:
@@ -16,7 +18,8 @@ class WaveClient:
         cls._node = node
         await node.connect()
 
-        bot._connection.dispatch_lavalink_event = cls._dispatch
+        # noinspection PyProtectedMember
+        setattr(bot._connection, "dispatch_lavalink_event", cls._dispatch)  # type: ignore[attr-defined]
 
     @classmethod
     def get_player(cls, guild_id: int) -> WavePlayer:
@@ -28,7 +31,7 @@ class WaveClient:
     async def _dispatch(cls, guild_id: int, payload: dict[str, object]) -> None:
         player = cls._players.get(guild_id)
         if player:
-            await player._voice_event(payload)
+            await player._voice_event(payload)  # type: ignore[attr-defined]
 
     @classmethod
     def get_node(cls) -> Node:
