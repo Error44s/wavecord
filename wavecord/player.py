@@ -32,7 +32,7 @@ class WavePlayer:
         )
 
     async def play(self, track: Track) -> None:
-        if not self.channel_id:
+        if self.channel_id is None:
             raise PlayerNotConnected("Player is not connected to a voice channel.")
 
         self.current = track
@@ -74,7 +74,7 @@ class WavePlayer:
         )
 
     async def skip(self) -> None:
-        next_track = self.queue.pop()
+        next_track: Optional[Track] = self.queue.pop()
         if next_track is None:
             await self.stop()
             return
