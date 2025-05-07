@@ -1,6 +1,7 @@
 from __future__ import annotations
-from typing import Callable, Dict, List, Any, DefaultDict
+from typing import Callable, DefaultDict, List, Any, Coroutine
 from collections import defaultdict
+import inspect
 
 
 class EventEmitter:
@@ -21,9 +22,10 @@ class EventEmitter:
     async def emit(self, event: str, *args, **kwargs) -> None:
         """Emits an event to all registered listeners."""
         for callback in self._listeners.get(event, []):
-            result = callback(*args, **kwargs)
-            if callable(result):
-                await result
+            if inspect.iscoroutinefunction(callback):
+                await callback(*args, **kwargs)
+            else:
+                callback(*args, **kwargs)
 
 
 # Global emitter instance
