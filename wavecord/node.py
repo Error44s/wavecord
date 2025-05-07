@@ -7,7 +7,8 @@ from typing import TYPE_CHECKING, Optional
 import aiohttp
 
 from .events import emitter
-from .exceptions import NodeConnectionError
+from .exceptions import NodeConnectionError, TrackLoadError
+from .track import Track
 
 if TYPE_CHECKING:
     from .player import WavePlayer
@@ -85,11 +86,19 @@ class Node:
 
         await self.ws.send_json(data)
 
-    async def load_tracks(self, identifier: str) -> dict[str, object]:
+    async def load_tracks(self, identifier: str) -> list[Track]:
         """Lädt Tracks oder Playlists von Lavalink mit dem gegebenen Identifier (Suchbegriff oder URL)."""
         async with self.session.get(
             f"{self.base_url}/v4/loadtracks",
             params={"identifier": identifier},
             headers={"Authorization": self.password},
         ) as resp:
-            return await resp.json()
+            if resp.status != 200:
+                raise TrackLoadError(f"Failed to load tracks for: {identifier}")
+
+            data = await resp.json()
+            tracks = data.get("data")
+            if not tracks:
+                return []
+
+            return [Track.build(track) for track in tracks]
