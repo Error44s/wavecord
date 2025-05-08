@@ -103,12 +103,12 @@ class Node:
     
             data = await resp.json()
             load_type = data.get("loadType")
+            track_data = data.get("data") or data.get("tracks")
     
-            if load_type not in ("TRACK_LOADED", "SEARCH_RESULT", "PLAYLIST_LOADED") or "tracks" not in data:
+            if load_type in ("NO_MATCHES", "LOAD_FAILED") or not track_data:
                 return []
     
-            tracks = data["tracks"]
-            return [Track.build(track) for track in tracks]
+            return [Track.build(track) for track in track_data]
 
 
 
