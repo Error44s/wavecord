@@ -100,10 +100,14 @@ class Node:
         ) as resp:
             if resp.status != 200:
                 raise TrackLoadError(f"Failed to load tracks for: {identifier}")
-
+    
             data = await resp.json()
-            track_data = data.get("data") or data.get("tracks", [])
-            if not track_data:
+            load_type = data.get("loadType")
+    
+            if load_type in ("NO_MATCHES", "LOAD_FAILED") or "tracks" not in data:
                 return []
+    
+            tracks = data["tracks"]
+            return [Track.build(track) for track in tracks]
 
-            return [Track.build(track) for track in track_data]
+
