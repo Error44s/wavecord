@@ -108,7 +108,12 @@ class Node:
             if load_type in ("NO_MATCHES", "LOAD_FAILED") or not track_data:
                 return []
     
-            return [Track.build(track) for track in track_data]
+            valid_tracks = [
+                Track.build(track)
+                for track in track_data
+                if isinstance(track, dict) and "track" in track and "info" in track
+            ]
+            return valid_tracks
 
 
 
